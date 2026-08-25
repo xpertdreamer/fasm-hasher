@@ -3,3 +3,5 @@
 ## MAYBE: 
   - GUI using Raylib (with Raygui) directly from FASM
   
+## References:
+  - <http://www.cse.yorku.ca/~oz/hash.html>
