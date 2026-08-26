@@ -11,9 +11,9 @@ macro print buf, len {
   syscall
 }
 
-macro exit {
+macro exit code {
+  mov rdi, code
   mov rax, 60
-  mov rdi, 0
   syscall
 }
   
