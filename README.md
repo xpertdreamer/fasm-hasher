@@ -5,3 +5,4 @@
   
 ## References:
   - <http://www.cse.yorku.ca/~oz/hash.html>
+  - <https://flatassembler.net/docs.php?article=manual>
