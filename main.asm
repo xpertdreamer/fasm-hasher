@@ -16,7 +16,25 @@ macro exit code {
   mov rax, 60
   syscall
 }
-  
+
+public _start
+
+section '.data' writable
+  teststr db 'A', 0
+
+section '.bss' writable
+  buffer db 24 dup (0)
+  endbuffer:
+
+section '.text' executable
+
+_start:
+  mov rdi, teststr
+  call hash
+  call unsigned_to_str
+  print ?
+  exit 0
+
 hash:
   push rcx
   mov rax, INITHASH
@@ -31,6 +49,9 @@ hash:
   add rax, rdx
   add rax, rcx
   jmp .loop
+
+unsigned_to_str:
+  ; TODO: convert unsigned decimal from hash to string buffer
 
 .end:
   pop rcx
