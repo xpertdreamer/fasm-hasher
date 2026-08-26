@@ -17,3 +17,21 @@ macro exit code {
   syscall
 }
   
+hash:
+  push rcx
+  mov rax, INITHASH
+  mov rcx, 0
+.loop:
+  mov cl, [rdi]
+  inc rdi
+  test rcx, rcx
+  jz .end
+  mov rdx, rax
+  shl rax, 5
+  add rax, rdx
+  add rax, rcx
+  jmp .loop
+
+.end:
+  pop rcx
+  ret
