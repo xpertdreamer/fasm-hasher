@@ -2,6 +2,7 @@ format ELF64
 
 define INITHASH 5381
 define STDOUT   1
+define NEWLINE  10
 
 macro print buf, len {
   mov rax, 1
@@ -20,16 +21,24 @@ macro exit code {
 public _start
 
 section '.data' writable
-  teststr db 'A', 0
+  msg db "Argument did not providen", NEWLINE, 0
+  msg_size = $ - msg
 
 section '.bss' writable
   buffer db 24 dup (0)
   endbuffer:
+  newline db 0
 
 section '.text' executable
 
 _start:
-  mov rdi, teststr
+  pop rax
+  cmp rax, 2
+  jl error
+  pop rdi
+  xor rdi, rdi
+  pop rdi
+
   call hash
   call unsigned_to_str
   print rsi ,rdx
@@ -54,9 +63,9 @@ hash:
   ret
 
 unsigned_to_str:
-  ; TODO: convert unsigned decimal from hash to string buffer
   push rbx
   push rcx
+  mov [newline], NEWLINE
   mov rbx, 10 ; divider
   mov rsi, endbuffer
 .loop:
@@ -67,8 +76,12 @@ unsigned_to_str:
   mov [rsi], dl
   test rax, rax
   jnz .loop
-  mov rdx, endbuffer
+  mov rdx, newline+1
   sub rdx, rsi
   pop rcx
   pop rbx
   ret
+
+error:
+  print msg, msg_size
+  exit 1
