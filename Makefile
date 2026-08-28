@@ -1,6 +1,5 @@
-main: main.o
-	ld build/main.o -o build/main
-	./build/main
+fasm-hasher: main.o
+	ld build/main.o -o build/fasm-hasher
 
 main.o: main.asm
 	@mkdir -p build/
