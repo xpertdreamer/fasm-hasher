@@ -1,7 +1,7 @@
 > [!NOTE]
 > Closed after Raylib linking
 
-> The idea is simpler than anything. Just take a hash function implementation in C and rewrite it in FASM.
+The idea is simpler than anything. Just take a hash function implementation in C and rewrite it in FASM.
 
 ## References:
   - <http://www.cse.yorku.ca/~oz/hash.html>
