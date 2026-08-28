@@ -32,7 +32,7 @@ _start:
   mov rdi, teststr
   call hash
   call unsigned_to_str
-  print ?
+  print rsi ,rdx
   exit 0
 
 hash:
@@ -49,10 +49,26 @@ hash:
   add rax, rdx
   add rax, rcx
   jmp .loop
+.end:
+  pop rcx
+  ret
 
 unsigned_to_str:
   ; TODO: convert unsigned decimal from hash to string buffer
-
-.end:
+  push rbx
+  push rcx
+  mov rbx, 10 ; divider
+  mov rsi, endbuffer
+.loop:
+  dec rsi
+  xor rdx, rdx
+  div rbx
+  add dl, '0'
+  mov [rsi], dl
+  test rax, rax
+  jnz .loop
+  mov rdx, endbuffer
+  sub rdx, rsi
   pop rcx
+  pop rbx
   ret
