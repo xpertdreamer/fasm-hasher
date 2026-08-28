@@ -5,6 +5,7 @@
   - <https://flatassembler.net/docs.php?article=manual>
   - <https://github.com/LilSuperUser/x86_64-asm-tutorials/blob/main/notes/013-CLI_arguments.md>
   - <https://stackoverflow.com/questions/10004448/x86-64-assembly-command-line-arguments>
+  - <https://github.com/raysan5/raylib/>
 
 ## MAYBE: 
   - GUI using Raylib (with Raygui) directly from FASM
