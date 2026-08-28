@@ -19,10 +19,14 @@ macro exit code {
 }
 
 public _start
+extrn InitWindow
+extrn CloseWindow
+
 
 section '.data' writable
   msg db "Argument did not providen", NEWLINE, 0
   msg_size = $ - msg
+  title db "Raylib Hasher", 0
 
 section '.bss' writable
   buffer db 24 dup (0)
@@ -39,8 +43,15 @@ _start:
   xor rdi, rdi
   pop rdi
 
+  push rdi
+  mov rdi, 400
+  mov rsi, 400
+  mov rdx, title
+  call InitWindow
+
   call hash
   call unsigned_to_str
+  call CloseWindow
   print rsi ,rdx
   exit 0
 
